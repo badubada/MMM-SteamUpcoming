@@ -1,0 +1,230 @@
+/* MMM-SteamUpcoming.css */
+
+.mmm-steamupcoming {
+  font-family: "Rajdhani", "Segoe UI", sans-serif;
+  color: #c6d4df;
+  min-width: 260px;
+  max-width: 420px;
+}
+
+/* ── Header ── */
+.su-header {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #66c0f4;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(102, 192, 244, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.su-logo { color: #1b9de2; font-size: 10px; }
+
+/* ── States ── */
+.su-loading, .su-empty, .su-error {
+  font-size: 12px;
+  opacity: 0.6;
+  padding: 8px 0;
+  font-style: italic;
+}
+.su-error { color: #f44; opacity: 0.8; }
+
+/* ── Game list ── */
+.su-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ── Game item ── */
+.su-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 4px;
+  border-left: 2px solid rgba(102, 192, 244, 0.3);
+  opacity: 0;
+  animation: suFadeIn 0.4s ease forwards;
+  transition: border-color 0.2s;
+}
+.su-item:hover {
+  border-left-color: #66c0f4;
+  background: rgba(102, 192, 244, 0.07);
+}
+@keyframes suFadeIn {
+  from { opacity: 0; transform: translateX(-6px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Cover ── */
+.su-cover {
+  width: 56px;
+  height: 26px;
+  object-fit: cover;
+  border-radius: 2px;
+  flex-shrink: 0;
+  opacity: 0.9;
+  background: rgba(255,255,255,0.05);
+}
+
+/* ── Info ── */
+.su-info { flex: 1; min-width: 0; }
+
+.su-title {
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #e8eef2;
+  line-height: 1.3;
+  margin-bottom: 2px;
+}
+
+/* ── Genre tags ── */
+.su-genres { display: flex; gap: 4px; margin-bottom: 3px; }
+.su-genre-tag {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #7ca9c4;
+  background: rgba(102, 192, 244, 0.1);
+  border: 1px solid rgba(102, 192, 244, 0.2);
+  border-radius: 2px;
+  padding: 1px 4px;
+}
+
+/* ── Score badges ── */
+.su-scores {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 3px;
+}
+
+.su-score-badge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-radius: 2px;
+  padding: 1px 5px;
+}
+
+.su-score-steam.su-score-positive { background: rgba(164, 208,   7, 0.15); color: #a4d007; border: 1px solid rgba(164, 208,   7, 0.3); }
+.su-score-steam.su-score-mixed    { background: rgba(196, 156,  10, 0.15); color: #c49c0a; border: 1px solid rgba(196, 156,  10, 0.3); }
+.su-score-steam.su-score-negative { background: rgba(220,  80,  50, 0.15); color: #dc5032; border: 1px solid rgba(220,  80,  50, 0.3); }
+
+.su-score-meta.su-score-positive  { background: rgba( 90, 170,  40, 0.15); color: #7ab832; border: 1px solid rgba( 90, 170,  40, 0.3); }
+.su-score-meta.su-score-mixed     { background: rgba(220, 150,   0, 0.15); color: #d89200; border: 1px solid rgba(220, 150,   0, 0.3); }
+.su-score-meta.su-score-negative  { background: rgba(190,  50,  30, 0.15); color: #be321e; border: 1px solid rgba(190,  50,  30, 0.3); }
+
+/* ── Release date ── */
+.su-date-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.su-release-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  background: rgba(27, 157, 226, 0.15);
+  color: #66c0f4;
+  border: 1px solid rgba(102, 192, 244, 0.3);
+  border-radius: 2px;
+  padding: 1px 6px;
+  white-space: nowrap;
+}
+
+/* Games releasing within 14 days get an accent colour */
+.su-release-badge.su-release-soon {
+  background: rgba(164, 208, 7, 0.15);
+  color: #a4d007;
+  border-color: rgba(164, 208, 7, 0.35);
+}
+
+.su-release-full {
+  font-size: 10px;
+  color: #6a8a9f;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Rotation indicator ── */
+.su-rotation-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  gap: 12px;
+}
+
+.su-page-dots {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+.su-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(102, 192, 244, 0.25);
+  transition: background 0.3s, transform 0.3s;
+}
+.su-dot-active {
+  background: #66c0f4;
+  transform: scale(1.35);
+}
+
+.su-countdown {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex: 1;
+  justify-content: flex-end;
+}
+.su-countdown-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #66c0f4;
+  opacity: 0.65;
+  letter-spacing: 0.05em;
+  min-width: 22px;
+  text-align: right;
+}
+.su-countdown-track {
+  flex: 1;
+  height: 2px;
+  background: rgba(102, 192, 244, 0.15);
+  border-radius: 1px;
+  overflow: hidden;
+  max-width: 120px;
+}
+.su-countdown-bar {
+  height: 100%;
+  background: #66c0f4;
+  border-radius: 1px;
+  transition: width 0.9s linear;
+}
+
+/* ── Footer ── */
+.su-footer {
+  font-size: 10px;
+  opacity: 0.3;
+  margin-top: 8px;
+  letter-spacing: 0.05em;
+}

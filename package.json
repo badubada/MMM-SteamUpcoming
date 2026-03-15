@@ -1,0 +1,15 @@
+{
+  "name": "mmm-steamupcoming",
+  "version": "1.0.0",
+  "description": "MagicMirror² module – Upcoming Steam games via Steam Store API",
+  "main": "MMM-SteamUpcoming.js",
+  "scripts": {
+    "test": "echo \"No tests configured\" && exit 0"
+  },
+  "keywords": ["magicmirror", "steam", "upcoming", "games"],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

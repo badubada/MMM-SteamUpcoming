@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MMM-SteamUpcoming – Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ── Page ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #1b2838;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      gap: 40px;
+    }
+
+    h2 {
+      font-family: "Rajdhani", "Segoe UI", sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(102, 192, 244, 0.4);
+      text-align: center;
+    }
+
+    .preview-row {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .preview-card {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .preview-label {
+      font-family: "Rajdhani", sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(102, 192, 244, 0.3);
+      text-align: center;
+    }
+
+    /* ── Module styles (copied from MMM-SteamUpcoming.css) ── */
+    .mmm-steamupcoming {
+      font-family: "Rajdhani", "Segoe UI", sans-serif;
+      color: #c6d4df;
+      min-width: 260px;
+      max-width: 420px;
+    }
+
+    .su-header {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #66c0f4;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(102, 192, 244, 0.25);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .su-logo { color: #1b9de2; font-size: 10px; }
+
+    .su-loading, .su-empty, .su-error {
+      font-size: 12px; opacity: 0.6; padding: 8px 0; font-style: italic;
+    }
+
+    .su-list {
+      list-style: none; margin: 0; padding: 0;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+
+    .su-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 7px 8px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 4px;
+      border-left: 2px solid rgba(102,192,244,0.3);
+      animation: suFadeIn 0.4s ease forwards;
+      transition: border-color 0.2s;
+    }
+    .su-item:hover {
+      border-left-color: #66c0f4;
+      background: rgba(102,192,244,0.07);
+    }
+    @keyframes suFadeIn {
+      from { opacity: 0; transform: translateX(-6px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .su-cover {
+      width: 56px; height: 26px; object-fit: cover;
+      border-radius: 2px; flex-shrink: 0; opacity: 0.9;
+      background: rgba(255,255,255,0.05);
+    }
+
+    .su-info { flex: 1; min-width: 0; }
+
+    .su-title {
+      font-size: 13px; font-weight: 600;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      color: #e8eef2; line-height: 1.3; margin-bottom: 2px;
+    }
+
+    .su-genres { display: flex; gap: 4px; margin-bottom: 3px; }
+    .su-genre-tag {
+      font-size: 9px; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; color: #7ca9c4;
+      background: rgba(102,192,244,0.1); border: 1px solid rgba(102,192,244,0.2);
+      border-radius: 2px; padding: 1px 4px;
+    }
+
+    .su-scores { display: flex; gap: 4px; margin-bottom: 3px; }
+    .su-score-badge { font-size: 9px; font-weight: 700; letter-spacing: 0.04em; border-radius: 2px; padding: 1px 5px; }
+    .su-score-steam.su-score-positive { background: rgba(164,208,7,0.15);  color: #a4d007; border: 1px solid rgba(164,208,7,0.3); }
+    .su-score-steam.su-score-mixed    { background: rgba(196,156,10,0.15); color: #c49c0a; border: 1px solid rgba(196,156,10,0.3); }
+    .su-score-steam.su-score-negative { background: rgba(220,80,50,0.15);  color: #dc5032; border: 1px solid rgba(220,80,50,0.3); }
+    .su-score-meta.su-score-positive  { background: rgba(90,170,40,0.15);  color: #7ab832; border: 1px solid rgba(90,170,40,0.3); }
+    .su-score-meta.su-score-mixed     { background: rgba(220,150,0,0.15);  color: #d89200; border: 1px solid rgba(220,150,0,0.3); }
+    .su-score-meta.su-score-negative  { background: rgba(190,50,30,0.15);  color: #be321e; border: 1px solid rgba(190,50,30,0.3); }
+
+    .su-date-row { display: flex; align-items: center; gap: 6px; margin-top: 2px; }
+    .su-release-badge {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.04em;
+      background: rgba(27,157,226,0.15); color: #66c0f4;
+      border: 1px solid rgba(102,192,244,0.3);
+      border-radius: 2px; padding: 1px 6px; white-space: nowrap;
+    }
+    .su-release-badge.su-release-soon {
+      background: rgba(164,208,7,0.15); color: #a4d007;
+      border-color: rgba(164,208,7,0.35);
+    }
+    .su-release-full {
+      font-size: 10px; color: #6a8a9f;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+
+    .su-rotation-indicator {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 10px; gap: 12px;
+    }
+    .su-page-dots { display: flex; align-items: center; gap: 5px; flex-shrink: 0; }
+    .su-dot {
+      display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(102,192,244,0.25); transition: background 0.3s, transform 0.3s;
+    }
+    .su-dot-active { background: #66c0f4; transform: scale(1.35); }
+
+    .su-countdown { display: flex; align-items: center; gap: 7px; flex: 1; justify-content: flex-end; }
+    .su-countdown-label {
+      font-size: 10px; font-weight: 600; color: #66c0f4; opacity: 0.65;
+      letter-spacing: 0.05em; min-width: 22px; text-align: right;
+    }
+    .su-countdown-track {
+      flex: 1; height: 2px; background: rgba(102,192,244,0.15);
+      border-radius: 1px; overflow: hidden; max-width: 120px;
+    }
+    .su-countdown-bar {
+      height: 100%; background: #66c0f4; border-radius: 1px;
+      transition: width 0.9s linear;
+    }
+
+    .su-footer { font-size: 10px; opacity: 0.3; margin-top: 8px; letter-spacing: 0.05em; }
+  </style>
+</head>
+<body>
+
+  <h2>MMM-SteamUpcoming — Preview</h2>
+
+  <div class="preview-row">
+
+    <!-- ── Standard view (5 games, no rotation) ── -->
+    <div class="preview-card">
+      <div class="preview-label">Standard</div>
+      <div class="mmm-steamupcoming">
+        <div class="su-header"><span class="su-logo">&#9654;</span> Steam – Upcoming</div>
+        <ul class="su-list">
+
+          <li class="su-item" style="animation-delay:0ms">
+            <img class="su-cover" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2767030/capsule_sm_120.jpg" alt="cover">
+            <div class="su-info">
+              <div class="su-title">Doom: The Dark Ages</div>
+              <div class="su-scores">
+                <span class="su-score-badge su-score-steam su-score-positive">♥ 91%</span>
+              </div>
+              <div class="su-genres">
+                <span class="su-genre-tag">Action</span>
+                <span class="su-genre-tag">Shooter</span>
+              </div>
+              <div class="su-date-row">
+                <span class="su-release-badge su-release-soon">in 7 days</span>
+                <span class="su-release-full">15 May, 2026</span>
+              </div>
+            </div>
+          </li>
+
+          <li class="su-item" style="animation-delay:80ms">
+            <img class="su-cover" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1919590/capsule_sm_120.jpg" alt="cover">
+            <div class="su-info">
+              <div class="su-title">Elden Ring: Nightreign</div>
+              <div class="su-scores">
+                <span class="su-score-badge su-score-steam su-score-positive">♥ 88%</span>
+                <span class="su-score-badge su-score-meta su-score-positive">MC 84</span>
+              </div>
+              <div class="su-genres">
+                <span class="su-genre-tag">RPG</span>
+                <span class="su-genre-tag">Action</span>
+              </div>
+              <div class="su-date-row">
+                <span class="su-release-badge su-release-soon">Tomorrow</span>
+                <span class="su-release-full">16 Mar, 2026</span>
+              </div>
+            </div>
+          </li>
+
+          <li class="su-item" style="animation-delay:160ms">
+            <img class="su-cover" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2369390/capsule_sm_120.jpg" alt="cover">
+            <div class="su-info">
+              <div class="su-title">Hollow Knight: Silksong</div>
+              <div class="su-genres">
+                <span class="su-genre-tag">Indie</span>
+                <span class="su-genre-tag">Platformer</span>
+              </div>
+              <div class="su-date-row">
+                <span class="su-release-badge">1 Jun, 2026</span>
+                <span class="su-release-full">Jun 2026</span>
+              </div>
+            </div>
+          </li>
+
+          <li class="su-item" style="animation-delay:240ms">
+            <img class="su-cover" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1623730/capsule_sm_120.jpg" alt="cover">
+            <div class="su-info">
+              <div class="su-title">Civilization VII</div>
+              <div class="su-scores">
+                <span class="su-score-badge su-score-meta su-score-mixed">MC 68</span>
+              </div>
+              <div class="su-genres">
+                <span class="su-genre-tag">Strategy</span>
+              </div>
+              <div class="su-date-row">
+                <span class="su-release-badge">1 Jul, 2026</span>
+                <span class="su-release-full">Q3 2026</span>
+              </div>
+            </div>
+          </li>
+
+          <li class="su-item" style="animation-delay:320ms">
+            <div class="su-info">
+              <div class="su-title">Project Shadowveil: Reckoning</div>
+              <div class="su-genres">
+                <span class="su-genre-tag">Horror</span>
+                <span class="su-genre-tag">Adventure</span>
+              </div>
+              <div class="su-date-row">
+                <span class="su-release-badge">TBA</span>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+        <div class="su-footer">Updated: 23:26</div>
+      </div>
+    </div>
+
+    <!-- ── Rotation view (page 2 of 3, with countdown) ── -->
+    <div class="preview-card">
+      <div class="preview-label">With Rotation</div>
+      <div class="mmm-steamupcoming">
+        <div class="su-header"><span class="su-logo">&#9654;</span> Steam – Upcoming</div>
+        <ul class="su-list">
+
+          <li class="su-item" style="animation-delay:0ms">
+            <img class="su-cover" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2835570/capsule_sm_120.jpg" alt="cover">
+            <div class="su-info">
+              <div class="su-title">Avowed</div>
+              <div class="su-scores">
+                <span class="su-score-badge su-score-steam su-score-mixed">♥ 72%</span>
+                <span class="su-score-badge su-score-meta su-score-mixed">MC 71</span>
+              </div>
+              <div class="su-genres">
+                <span class="su-genre-tag">RPG</span>
+                <span class="su-genre-tag">Adventure</span>
+              </div>
+              <div class="su-date-row">
+                <span class="su-release-badge">18 Apr, 2026</span>
+                <span class="su-release-full">18 Apr, 2026</span>
+              </div>
+            </div>
+          </li>
+
+          <li class="su-item" style="animation-delay:80ms">
+            <img class="su-cover" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1938090/capsule_sm_120.jpg" alt="cover">
+            <div class="su-info">
+              <div class="su-title">Starfield: Shattered Space II</div>
+              <div class="su-genres">
+                <span class="su-genre-tag">RPG</span>
+                <span class="su-genre-tag">Open World</span>
+              </div>
+              <div class="su-date-row">
+                <span class="su-release-badge">1 Apr, 2026</span>
+                <span class="su-release-full">Apr 2026</span>
+              </div>
+            </div>
+          </li>
+
+          <li class="su-item" style="animation-delay:160ms">
+            <div class="su-info">
+              <div class="su-title">Frostpunk 3</div>
+              <div class="su-genres">
+                <span class="su-genre-tag">Strategy</span>
+                <span class="su-genre-tag">Simulation</span>
+              </div>
+              <div class="su-date-row">
+                <span class="su-release-badge">TBA</span>
+              </div>
+            </div>
+          </li>
+
+          <li class="su-item" style="animation-delay:240ms">
+            <img class="su-cover" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2358720/capsule_sm_120.jpg" alt="cover">
+            <div class="su-info">
+              <div class="su-title">Warhammer 40,000: Space Marine III</div>
+              <div class="su-genres">
+                <span class="su-genre-tag">Action</span>
+                <span class="su-genre-tag">Co-op</span>
+              </div>
+              <div class="su-date-row">
+                <span class="su-release-badge su-release-soon">in 3 days</span>
+                <span class="su-release-full">18 Mar, 2026</span>
+              </div>
+            </div>
+          </li>
+
+          <li class="su-item" style="animation-delay:320ms">
+            <div class="su-info">
+              <div class="su-title">Midnight Protocol: Redux</div>
+              <div class="su-genres">
+                <span class="su-genre-tag">Indie</span>
+                <span class="su-genre-tag">Puzzle</span>
+              </div>
+              <div class="su-date-row">
+                <span class="su-release-badge">1 Oct, 2026</span>
+                <span class="su-release-full">Q4 2026</span>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+
+        <!-- Rotation indicator -->
+        <div class="su-rotation-indicator">
+          <div class="su-page-dots">
+            <span class="su-dot"></span>
+            <span class="su-dot su-dot-active"></span>
+            <span class="su-dot"></span>
+          </div>
+          <div class="su-countdown">
+            <span class="su-countdown-label" id="cd-label">8s</span>
+            <div class="su-countdown-track">
+              <div class="su-countdown-bar" id="cd-bar" style="width:80%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="su-footer">Updated: 23:26</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Live countdown animation -->
+  <script>
+    const intervalSec = 10;
+    let secondsLeft   = 8;
+
+    const label = document.getElementById("cd-label");
+    const bar   = document.getElementById("cd-bar");
+
+    setInterval(() => {
+      secondsLeft = secondsLeft <= 0 ? intervalSec : secondsLeft - 1;
+      label.textContent = secondsLeft + "s";
+      bar.style.width   = ((secondsLeft / intervalSec) * 100) + "%";
+    }, 1000);
+  </script>
+
+</body>
+</html>
