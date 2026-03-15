@@ -2,6 +2,7 @@
 
 A MagicMirror² module that shows upcoming Steam games – games that have been announced but not yet released. Built as a companion to **MMM-SteamDeals**, it reuses the same genre filter, country/region filter, rotation, and visual design.
 No API key required.
+This module was vibe coded with Anthropic's Claude AI - Sonnet 4.6. Please feel free to adapt it / improve it / make suggestions.
 ---
 
 ## Screenshot
