@@ -29,7 +29,7 @@ This module was vibe coded with Anthropic's Claude AI - Sonnet 4.6. Please feel 
 
 ```bash
 cd ~/MagicMirror/modules
-git clone https://github.com/your-username/MMM-SteamUpcoming
+git clone https://github.com/badubada/MMM-SteamUpcoming
 # No npm install needed – no external dependencies
 ```
 
